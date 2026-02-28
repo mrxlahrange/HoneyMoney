@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HoneyMoney - Earn Smart</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#0f0f0f;
+  color:white;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 8%;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:700;
+  color:#f5b800;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin-left:25px;
+  font-size:14px;
+  transition:0.3s;
+}
+
+nav a:hover{
+  color:#f5b800;
+}
+
+.hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:100px 20px;
+}
+
+.hero h1{
+  font-size:48px;
+  max-width:700px;
+  line-height:1.2;
+}
+
+.hero span{
+  color:#f5b800;
+}
+
+.hero p{
+  margin-top:20px;
+  color:#bbb;
+  max-width:600px;
+}
+
+.buttons{
+  margin-top:40px;
+}
+
+.btn{
+  padding:14px 30px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+  margin:10px;
+  transition:0.3s;
+}
+
+.btn-primary{
+  background:#f5b800;
+  color:black;
+}
+
+.btn-primary:hover{
+  background:#ffd84d;
+}
+
+.btn-outline{
+  border:2px solid #f5b800;
+  color:#f5b800;
+}
+
+.btn-outline:hover{
+  background:#f5b800;
+  color:black;
+}
+
+.section{
+  padding:80px 8%;
+  text-align:center;
+}
+
+.section h2{
+  font-size:32px;
+  margin-bottom:50px;
+}
+
+.steps{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:30px;
+}
+
+.step{
+  background:#1a1a1a;
+  padding:30px;
+  border-radius:12px;
+  flex:1;
+  min-width:250px;
+  transition:0.3s;
+}
+
+.step:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(245,184,0,0.2);
+}
+
+.step h3{
+  margin-bottom:15px;
+  color:#f5b800;
+}
+
+.stats{
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  gap:30px;
+}
+
+.stat{
+  font-size:28px;
+  font-weight:700;
+}
+
+.stat span{
+  display:block;
+  font-size:14px;
+  color:#aaa;
+  margin-top:5px;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  background:#0a0a0a;
+  color:#666;
+  font-size:14px;
+}
+</style>
+</head>
+<script>
+const names = ["Michael","Sarah","John","Emma","David","Sophia","Daniel","Olivia"];
+const amounts = ["$3.20","$5.80","$2.10","$7.40","$4.60","$6.25"];
+
+function showNotification(){
+    const randomName = names[Math.floor(Math.random()*names.length)];
+    const randomAmount = amounts[Math.floor(Math.random()*amounts.length)];
+
+    const notification = document.createElement("div");
+    notification.innerHTML = `<strong>${randomName}</strong> just earned <strong>${randomAmount}</strong>`;
+    
+    notification.style.position="fixed";
+    notification.style.bottom="20px";
+    notification.style.left="20px";
+    notification.style.background="#1a1a1a";
+    notification.style.color="white";
+    notification.style.padding="15px 20px";
+    notification.style.borderRadius="8px";
+    notification.style.boxShadow="0 5px 20px rgba(0,0,0,0.5)";
+    notification.style.borderLeft="4px solid #f5b800";
+    notification.style.opacity="0";
+    notification.style.transition="0.5s";
+
+    document.body.appendChild(notification);
+
+    setTimeout(()=> notification.style.opacity="1",100);
+
+    setTimeout(()=>{
+        notification.style.opacity="0";
+        setTimeout(()=> notification.remove(),500);
+    },4000);
+}
+
+setInterval(showNotification,6000);
+</script>
+<body>
+
+<header>
+  <div class="logo">HoneyMoney</div>
+  <nav>
+  
+ 
+    <a href="login.html">Login</a>
+    <a href="singup.html">SginUp</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Get Paid for Completing <span>Simple Online Tasks</span></h1>
+  <p>Join thousands of users earning money daily by testing apps, answering surveys, and trying new platforms.</p>
+  <div class="buttons">
+    <a href="login.html" class="btn btn-outline">Login</a>
+    <a href="singup.html"  class="btn btn-primary">Start SginUp</a>
+  </div>
+</section>
+
+<section class="section">
+  <h2>How It Works</h2>
+  <div class="steps">
+    <div class="step">
+      <h3>1. Create Account</h3>
+      <p>Sign up for free and access your earning dashboard instantly.</p>
+    </div>
+    <div class="step">
+      <h3>2. Complete Tasks</h3>
+      <p>Install apps, complete surveys, and try new platforms.</p>
+    </div>
+    <div class="step">
+      <h3>3. Withdraw Earnings</h3>
+      <p>Request payout once you reach the minimum withdrawal amount.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Platform Statistics</h2>
+  <div class="stats">
+    <div class="stat">$124,530<span>Total Paid</span></div>
+    <div class="stat">18,240<span>Active Users</span></div>
+    <div class="stat">320<span>Daily Tasks</span></div>
+  </div>
+</section>
+
+<footer>
+  © 2026 HoneyMoney. All rights reserved.
+</footer>
+
+</body>
+</html>

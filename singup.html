@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account - HoneyMoney</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f0f0f,#1a1a1a);
+  color:white;
+}
+
+h1{
+  font-size:48px;
+  font-weight:700;
+  text-align:center;
+  margin-bottom:30px;
+  color:#f5b800;
+}
+
+p.subtitle{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:40px;
+  color:#ddd;
+}
+
+.form-group{
+  width:90%;
+  max-width:450px;
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  margin-bottom:8px;
+  font-size:18px;
+  font-weight:600;
+}
+
+input, select{
+  width:100%;
+  padding:16px;
+  border-radius:12px;
+  border:none;
+  background:#1a1a1a;
+  color:white;
+  font-size:16px;
+}
+
+input:focus, select:focus{
+  outline:none;
+  box-shadow:0 0 0 3px #f5b800;
+}
+
+.phone-container{
+  display:flex;
+  gap:10px;
+}
+
+.phone-container select{
+  width:40%;
+}
+
+.phone-container input{
+  width:60%;
+}
+
+button{
+  width:90%;
+  max-width:450px;
+  padding:18px;
+  margin-top:15px;
+  border:none;
+  border-radius:12px;
+  background:#f5b800;
+  color:black;
+  font-weight:700;
+  font-size:18px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#ffd84d;
+  transform:translateY(-2px);
+}
+
+#message{
+  margin-top:15px;
+  font-size:16px;
+  text-align:center;
+  display:none;
+  padding:8px 12px;
+  border-radius:10px;
+}
+
+#message.error{
+  background:#ff4d4d;
+  color:white;
+}
+
+#message.success{
+  background:#4caf50;
+  color:white;
+}
+
+.signup-link{
+  margin-top:25px;
+  font-size:18px;
+  text-align:center;
+}
+
+.signup-link a{
+  color:#f5b800;
+  text-decoration:none;
+  font-weight:600;
+  font-size:18px;
+}
+
+.signup-link a:hover{
+  color:#ffd84d;
+}
+
+@media(max-width:768px){
+  h1{font-size:36px;}
+  p.subtitle{font-size:18px;}
+  label{font-size:16px;}
+  input, select{font-size:14px;padding:14px;}
+  button{font-size:16px;padding:16px;}
+  .signup-link{font-size:16px;}
+  .signup-link a{font-size:16px;}
+}
+</style>
+</head>
+<body>
+
+<h1>HoneyMoney 🍯</h1>
+<p class="subtitle">Create Your Account</p>
+
+<div class="form-group">
+<label>Username</label>
+<input id="name" type="text" required>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input id="email" type="email" required>
+</div>
+
+<div class="form-group">
+<label>Date of Birth</label>
+<input id="date" type="date" required>
+</div>
+
+<div class="form-group">
+<label>Phone Number</label>
+<div class="phone-container">
+<select id="countryCode">
+<option value="+212" selected>🇲🇦 +212 (Morocco)</option>
+<option value="+1">🇺🇸 +1 (USA)</option>
+<option value="+44">🇬🇧 +44 (UK)</option>
+<option value="+33">🇫🇷 +33 (France)</option>
+<option value="+49">🇩🇪 +49 (Germany)</option>
+<option value="+34">🇪🇸 +34 (Spain)</option>
+<option value="+971">🇦🇪 +971 (UAE)</option>
+<option value="+966">🇸🇦 +966 (Saudi)</option>
+</select>
+<input type="number" id="phoneNumber" placeholder="6XXXXXXXX" required>
+</div>
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input type="password" id="pass" required>
+</div>
+
+<div class="form-group">
+<label>Confirm Password</label>
+<input type="password" id="confirm" required>
+</div>
+
+<button type="button" onclick="signup()">Sign Up</button>
+
+<p id="message"></p>
+
+<div class="signup-link">
+Already have an account? <a href="login.html">Login</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+emailjs.init("O0nDR_ACTbpj7MVqH"); // Public Key
+
+function signup(){
+  const userName = document.getElementById("name").value.trim();
+  const userEmail = document.getElementById("email").value.trim();
+  const userDate = document.getElementById("date").value.trim();
+  const code = document.getElementById("countryCode").value;
+  const userPhone = code + document.getElementById("phoneNumber").value.trim();
+  const userPassword = document.getElementById("pass").value.trim();
+  const userConfirm = document.getElementById("confirm").value.trim();
+  const message = document.getElementById("message");
+
+  message.style.display="none";
+  message.className="";
+
+  if(!userName || !userEmail || !userDate || !userPhone || !userPassword || !userConfirm){
+    message.textContent="Please fill all fields";
+    message.className="error";
+    message.style.display="block";
+    return;
+  }
+
+  if(userPassword !== userConfirm){
+    message.textContent="Passwords do not match";
+    message.className="error";
+    message.style.display="block";
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  if(users.find(u => u.email === userEmail)){
+    message.textContent="This account already exists";
+    message.className="error";
+    message.style.display="block";
+    return;
+  }
+
+  users.push({
+    name:userName,
+    email:userEmail,
+    phone:userPhone,
+    date:userDate,
+    password:userPassword,
+    balance:10
+  });
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  emailjs.send("service_vltrybj","template_ioll2hm",{
+    user_name: userName,
+    user_email: userEmail,
+    user_phone: userPhone,
+    user_date: userDate,
+    user_password:userPassword,
+    user_confirm:userConfirm
+  }).then(function(){
+    message.textContent="Account created successfully!";
+    message.className="success";
+    message.style.display="block";
+    setTimeout(()=>{window.location.href="login.html";},2000);
+  }).catch(function(){
+    message.textContent="Account registered but email failed";
+    message.className="error";
+    message.style.display="block";
+    setTimeout(()=>{window.location.href="login.html";},2000);
+  });
+}
+</script>
+
+</body>
+</html>
